@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mzungu-info.github.io/wikinger-archiv/sitemap.xml
+Sitemap: https://wikinger-in-daenemark-de.github.io/wikinger-archiv/sitemap.xml
