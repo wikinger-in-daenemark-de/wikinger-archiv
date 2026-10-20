@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mzungu-info.github.io/wikinger-archiv/sitemap.xml
