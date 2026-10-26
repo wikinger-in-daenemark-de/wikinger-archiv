@@ -41,13 +41,13 @@
     var seen = {};
     document.querySelectorAll('img[xthumbnail-orig-image]').forEach(function (img) {
       var full = img.getAttribute('xthumbnail-orig-image');
-      if (full && !seen[full]) { seen[full] = 1; list.push({ src: full, el: img }); }
+      if (full && !seen[full]) { seen[full] = 1; var _pa = img.closest('a'); list.push({ src: full, el: img, caption: img.getAttribute('alt') || (_pa && _pa.getAttribute('title')) || '' }); }
     });
     document.querySelectorAll('a[href]').forEach(function (a) {
       var h = a.getAttribute('href');
       if (isImage(h)) {
         if (a.querySelector('img[xthumbnail-orig-image]')) return;
-        if (!seen[h]) { seen[h] = 1; list.push({ src: h, el: a }); }
+        if (!seen[h]) { seen[h] = 1; var _im = a.querySelector('img'); list.push({ src: h, el: a, caption: a.getAttribute('title') || (_im && _im.getAttribute('alt')) || '' }); }
       }
     });
     return list;
@@ -58,6 +58,7 @@
     if (i >= list_len()) i = 0;
     idx = i;
     overlay.querySelector('.lightbox-img').src = items[i].src;
+    overlay.querySelector('.lightbox-caption').textContent = items[i].caption || '';
     overlay.querySelector('.lightbox-count').textContent = (i + 1) + ' / ' + items.length;
   }
   function list_len() { return items.length; }
@@ -67,6 +68,7 @@
       overlay = document.createElement('div');
       overlay.className = 'lightbox';
       overlay.innerHTML = '<div class="lightbox-img-wrap"><img class="lightbox-img" alt=""></div>' +
+        '<div class="lightbox-caption"></div>' +
         '<button class="lightbox-close" aria-label="Schließen">×</button>' +
         '<button class="lightbox-prev" aria-label="Zurück">‹</button>' +
         '<button class="lightbox-next" aria-label="Vorwärts">›</button>' +
